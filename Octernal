@@ -775,21 +775,23 @@ do
                     task.wait(1)
                 end
             end)
-            --
+            
             utility:Connection(rs.RenderStepped, function(FPS)
                 library.shared.ping = stats.Network:FindFirstChild("ServerStatsItem") and tostring(math.floor(stats.Network.ServerStatsItem["Data Ping"]:GetValue())) or "Unknown"
-                --
-                --local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+            
+                -- Uncomment if GameName is defined elsewhere
+                -- local GameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+            
                 if (tick() - Tick) > 0.15 then
-                    watermark_title.Text = string.format("ZeeBot |%s,  Fps = %u,  | "..GameName, library.shared.ping, library.shared.fps)
+                    -- Update watermark text with FPS, ping, and game name
+                    watermark_title.Text = string.format("ZeeBot | Ping: %s, FPS: %u | %s", library.shared.ping, library.shared.fps, GameName or "Unknown")
                     window.watermark:UpdateSize()
-                    --
                     Tick = tick()
                 end
             end)
-            --
+            
             return window.watermark
-        end
+            
         --
         function window:NotificationList(info)
             window.notificationlist = {notifications = {}}
